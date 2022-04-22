@@ -26,8 +26,11 @@ const App = () => {
       style={{ height: "100vh" }}
     >
       <div className="">
-        <h4 className="text-dark mb-3">Page {url.slice(-1)}</h4>
-        <Posts loading={loading} posts={posts} url={url} setUrl={setUrl} />
+        <div className="d-flex justify-content-between align-items-center">
+          <h4 className="text-dark mb-3">Page {url.slice(-1)}</h4>
+          {loading && <h4 className="text-dark mb-3">Loading...</h4>}
+        </div>
+        <Posts posts={posts} url={url} setUrl={setUrl} />
       </div>
     </div>
   );

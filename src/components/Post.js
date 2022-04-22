@@ -1,14 +1,11 @@
 import React from "react";
 import "./Post.css";
 
-const Post = ({ posts, loading, setUrl }) => {
-  if (loading) {
-    return <h2>Loading...</h2>;
-  }
-
+const Post = ({ posts, setUrl }) => {
   return (
     <div className="">
-      <table className="table table-striped table-bordered">
+      <div></div>
+      <table className="table table-striped table-bordered table-responsive">
         <thead>
           <tr>
             <th scope="col">Name</th>
