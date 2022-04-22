@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+import axios from "axios";
+import Posts from "./components/Post";
 
-function App() {
+const App = () => {
+  const [posts, setPosts] = useState([]);
+  const [url, setUrl] = useState("https://swapi.dev/api/planets/?page=1");
+  const [loading, setLoading] = useState(false);
+
+  //   FETCHING DATA FROM THE API
+
+  useEffect(() => {
+    const fetchPosts = async (URL) => {
+      setLoading(true);
+      const res = await axios.get(URL);
+      setPosts(res.data);
+      setLoading(false);
+    };
+
+    fetchPosts(url);
+  }, [url]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div
+      className="w-100 d-flex justify-content-center align-items-center"
+      style={{ height: "100vh" }}
+    >
+      <div className="">
+        <h4 className="text-dark mb-3">Page {url.slice(-1)}</h4>
+        <Posts loading={loading} posts={posts} url={url} setUrl={setUrl} />
+      </div>
     </div>
   );
-}
+};
 
 export default App;
